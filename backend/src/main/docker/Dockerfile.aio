@@ -80,7 +80,7 @@
 FROM registry.access.redhat.com/ubi8/openjdk-17:1.17 as build
 COPY . .
 RUN pwd
-RUN ./mvnw package
+RUN mvn package
 
 FROM registry.access.redhat.com/ubi8/openjdk-17:1.17
 
