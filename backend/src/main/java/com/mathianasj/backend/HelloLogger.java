@@ -13,13 +13,17 @@ import java.io.IOException;
 @Path("/hello")
 public class HelloLogger {
     @GET
-    public String echo() throws IOException {
-        File dir = new File("/create/mount/here");
-        File f = File.createTempFile("present", ".txt", dir);
-        FileWriter fileWriter = new FileWriter(f.getName(), true);
-        BufferedWriter bw = new BufferedWriter(fileWriter);
-        bw.write("testing");
-        bw.close();
+    public String echo() {
+        try {
+            File dir = new File("/create/mount/here");
+            File f = File.createTempFile("present", ".txt", dir);
+            FileWriter fileWriter = new FileWriter(f.getName(), true);
+            BufferedWriter bw = new BufferedWriter(fileWriter);
+            bw.write("testing");
+            bw.close();
+        } catch(IOException ex) {
+            throw new RuntimeException("could not write temporary file to /create/mount/here", ex);
+        }
 
             return "Hello";
     }
