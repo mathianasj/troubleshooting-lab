@@ -1,0 +1,26 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: troubleshooting-frontend
+  labels:
+    app: troubleshooting-frontend
+    app.kubernetes.io/component: troubleshooting-frontend
+    app.kubernetes.io/instance: troubleshooting-frontend
+    app.kubernetes.io/name: troubleshooting-frontend
+    app.kubernetes.io/part-of: troubleshooting-backend-app
+    app.openshift.io/runtime-version: latest
+  annotations:
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"apps/v1","kind":"Deployment","name":"troubleshooting-backend"}]
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: troubleshooting-frontend
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

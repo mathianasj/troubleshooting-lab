@@ -1,0 +1,24 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: troubleshooting-backend
+  labels:
+    app: troubleshooting-backend
+    app.kubernetes.io/component: troubleshooting-backend
+    app.kubernetes.io/instance: troubleshooting-backend
+    app.kubernetes.io/name: troubleshooting-backend
+    app.kubernetes.io/part-of: troubleshooting-backend-app
+    app.openshift.io/runtime-version: latest
+  annotations:
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"postgresql"}]
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  selector:
+    app: troubleshooting-backend
+    deployment: troubleshooting-backend
