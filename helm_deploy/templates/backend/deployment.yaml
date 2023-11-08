@@ -81,7 +81,5 @@ spec:
       from:
         kind: DockerImage
         name: 'quay.io/mathianasj/troubleshooting-backend:latest'
-      importPolicy:
-        importMode: Legacy
       referencePolicy:
         type: Local
